@@ -1,0 +1,180 @@
+﻿@model WS.Proyecto.Mapa.Web.Models.ExternalGame
+
+@{
+    ViewData["Title"] = "Game data";
+}
+
+<div class="float-right">
+    <a asp-action="Index">Back to List</a>
+</div>
+<h1>Game data</h1>
+<div>
+    <br />
+    <hr />
+    <div class="row">
+        <h4 class="col-sm-6">
+            Identification code for requests
+        </h4>
+        <h4 class="col-sm-6">
+            @Html.DisplayFor(model => model.Id)
+        </h4>
+    </div>
+    <hr />
+    <br />
+    <div class="row">
+        <img class="rounded mx-auto d-block" style="width:200px" src="@Html.DisplayFor(model => model.ImageURL)">
+    </div>
+    <hr />
+    <dl class="row">
+        @if (Model.Name != "_error")
+        {
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+        }
+        @if (Model.YearPublished != -1)
+        {
+            <dt class="col-sm-4">
+                Year published
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.YearPublished)
+            </dd>
+        }
+        @if (Model.MinPlayers != -1)
+        {
+            <dt class="col-sm-4">
+                Minimum number of players
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.MinPlayers)
+            </dd>
+        }
+        @if (Model.MaxPlayers != -1)
+        {
+            <dt class="col-sm-4">
+                Maximum number of players
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.MaxPlayers)
+            </dd>
+        }
+        @if (Model.MinPlaytime != -1)
+        {
+            <dt class="col-sm-4">
+                Minimum playtime
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.MinPlaytime)
+            </dd>
+        }
+        @if (Model.MaxPlaytime != -1)
+        {
+            <dt class="col-sm-4">
+                Maximum playtime
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.MaxPlaytime)
+            </dd>
+        }
+        @if (Model.Description != "_error")
+        {
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+        }
+        @if (Model.URL != "_error")
+        {
+            <dt class="col-sm-4">
+                Data source
+            </dt>
+            <dd class="col-sm-8">
+                <a href="@Html.DisplayFor(model => model.URL)">
+                    @Html.DisplayFor(model => model.URL)
+                </a>
+            </dd>
+        }
+        @if (Model.Price != "_error")
+        {
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Price) $
+            </dd>
+        }
+        @if (Model.PrimaryPublisher != "_error")
+        {
+            <dt class="col-sm-4">
+                Primary publisher
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.PrimaryPublisher)
+            </dd>
+        }
+        @if (Model.NumUserRatings != -1)
+        {
+            <dt class="col-sm-4">
+                Number of votes
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.NumUserRatings)
+            </dd>
+        }
+        @if (Model.AverageUserRating != -1)
+        {
+            <dt class="col-sm-4">
+                Average rating
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.AverageUserRating)
+            </dd>
+        }
+        @if (Model.OfficialURL != "_error")
+        {
+            <dt class="col-sm-4">
+                Official page of the game
+            </dt>
+            <dd class="col-sm-8">
+                <a href="@Html.DisplayFor(model => model.OfficialURL)">
+                    @Html.DisplayFor(model => model.OfficialURL)
+                </a>
+            </dd>
+        }
+        @if (Model.RulesURL != "_error")
+        {
+            <dt class="col-sm-4">
+                Rules
+            </dt>
+            <dd class="col-sm-8">
+                <a href="@Html.DisplayFor(model => model.RulesURL)">
+                    @Html.DisplayFor(model => model.RulesURL)
+                </a>
+            </dd>
+        }
+        @if (Model.WeightAmount != -1 && Model.WeightUnits != "_error")
+        {
+            <dt class="col-sm-4">
+                Weight
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.WeightAmount) @Html.DisplayFor(model => model.WeightUnits)
+            </dd>
+        }
+        @if (Model.SizeHeight != -1 && Model.SizeUnits != "_error")
+        {
+            <dt class="col-sm-4">
+                Size
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.SizeHeight) @Html.DisplayFor(model => model.SizeUnits) x @Html.DisplayFor(model => model.SizeWidth) @Html.DisplayFor(model => model.SizeUnits) x @Html.DisplayFor(model => model.SizeDepth) @Html.DisplayFor(model => model.SizeUnits)
+            </dd>
+        }
+    </dl>
+</div>

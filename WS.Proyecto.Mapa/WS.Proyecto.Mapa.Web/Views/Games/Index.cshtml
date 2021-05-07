@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Lista de juegos";
+}
+<h1>100 most famous games</h1>
+@foreach (var item in ViewBag.Alphabet)
+{
+    <h3>@item</h3>
+    <ul>
+        @foreach (WS.Proyecto.Mapa.Web.Models.ExternalGame game in ViewBag.MySortedList)
+        {
+            @if (game.Name.StartsWith(item))
+            {
+                <!--<li>@Html.Name(game.Name)</li>-->
+                <li>@Html.ActionLink(game.Name, "Games", new { id = game.Id })</li>
+            }
+        }
+    </ul>
+}

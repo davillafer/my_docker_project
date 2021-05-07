@@ -1,0 +1,20 @@
+version: '3.4'
+
+services:
+  WS.Proyecto.Mapa.WebAPI:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "9090:80"
+
+  WS.Proyecto.Mapa.Application:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "9080:80"
+
+  WS.Proyecto.Mapa.Web:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80:80"

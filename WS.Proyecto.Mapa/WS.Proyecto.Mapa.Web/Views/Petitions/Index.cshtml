@@ -1,0 +1,104 @@
+﻿@model WS.Proyecto.Mapa.Web.Models.Petition
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Map of requests</h1>
+
+<h4>Create a request</h4>
+<hr />
+@if (ViewBag.Success)
+{
+    <div class="text-center" style="border: 4px solid green; border-radius: 25px;">
+        <p>
+            <b>Success saving your request</b>
+        </p>
+    </div>
+    <br />
+}
+@if (!ViewBag.isValidUser)
+{
+    <div class="text-center" style="border: 4px solid red; border-radius: 25px;">
+        <p>
+            <b>Your credentials are wrong!. Please review them</b>
+        </p>
+    </div>
+    <br />
+}
+<div id="myTreasure" style="visibility: hidden; opacity: 0; display: none;">
+    @foreach (WS.Proyecto.Mapa.Web.Models.Coordinates c in ViewBag.coordinates)
+    {
+        <p class="myHidden">@c.Lat</p>
+        <p class="myHidden">@c.Lng</p>
+    }
+</div>
+<div class="row">
+    <div class="col-sm-4">
+        <form asp-controller="Petitions" asp-action="Index" method="post">
+            <div>
+                <b>Introduce you login and password from our shop:</b>
+            </div>
+            <div class="form-group">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" required />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" required />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div>
+                <a href="http://localhost:8080/WebClient/signup">Don't you have an account</a>
+            </div>
+            <div>
+                <b>Introduce the identifier code of the board game you want:</b>
+            </div>
+            <div class="form-group">
+                <label asp-for="BoardGame" class="control-label"></label>
+                <input asp-for="BoardGame" class="form-control" />
+                <span asp-validation-for="BoardGame" class="text-danger"></span>
+            </div>
+            <div>
+                <a href="http://localhost:9070/Games/Search">Don't you know the game identifier</a>
+            </div>
+            <div>
+                <b>Introduce the coordinates where you want to receive the game:</b>
+            </div>
+            <div class="form-group">
+                <label asp-for="Latitude" class="control-label"></label>
+                <input asp-for="Latitude" type="number" step="0.000001" class="form-control" required />
+                <span asp-validation-for="Latitude" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Longitude" class="control-label"></label>
+                <input asp-for="Longitude" type="number" step="0.000001" class="form-control" required />
+                <span asp-validation-for="Longitude" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    <div col-sm-8>
+        <div id="map" style="width: 700px; height: 700px;"></div>
+        <script>
+            function initMap() {
+                var myTreasure = document.getElementsByClassName("myHidden");
+                var petitions = [];
+                for (var i = 0; i < myTreasure.length; i = i + 2) {
+                    var one = myTreasure[i].textContent.replace(",", ".");
+                    var two = myTreasure[i + 1].textContent.replace(",", ".");
+                    petitions.push({ lat: Number(one), lng: Number(two) })
+                }
+                var map = new google.maps.Map(document.getElementById('map'), { zoom: 5, center: petitions[petitions.length-1] });
+                petitions.forEach(element => {
+                    console.log(element);
+                    new google.maps.Marker({ position: element, map: map });
+                });
+            }
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=<YOUR_KEY>&callback=initMap" async defer></script>
+    </div>
+</div>

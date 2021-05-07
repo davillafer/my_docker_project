@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Buscador";
+}
+<h1>Search your game</h1>
+<form asp-controller="Games" asp-action="Searching">
+    <p>
+        Name: <input type="text" name="id">
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+@if (!ViewBag.ShowTable || ViewBag.MySortedList.Count == 0)
+{
+    <div>
+        <br />
+        <br />
+        <h4>No content found</h4>
+    </div>
+}
+@if (ViewBag.ShowTable && ViewBag.MySortedList.Count != 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Code
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (WS.Proyecto.Mapa.Web.Models.ExternalGame game in ViewBag.MySortedList)
+            {
+                <tr>
+                    <td>
+                        @game.Name
+                    </td>
+                    <td>
+                        @game.Id
+                    </td>
+                    <td>
+                        <a asp-action="Games" asp-route-id="@game.Id">Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

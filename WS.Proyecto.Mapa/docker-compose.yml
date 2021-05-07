@@ -1,0 +1,20 @@
+version: '3.4'
+
+services:
+  WS.Proyecto.Mapa.WebAPI:
+    image:  ${DOCKER_REGISTRY}petitionswebapi
+    build:
+      context: .
+      dockerfile: WS.Proyecto.Mapa.WebAPI/Dockerfile
+
+  WS.Proyecto.Mapa.Application:
+    image:  ${DOCKER_REGISTRY}applicationweb
+    build:
+      context: .
+      dockerfile: WS.Proyecto.Mapa.Application/Dockerfile
+
+  WS.Proyecto.Mapa.Web:
+    image:  ${DOCKER_REGISTRY}web
+    build:
+      context: .
+      dockerfile: WS.Proyecto.Mapa.Web/Dockerfile
